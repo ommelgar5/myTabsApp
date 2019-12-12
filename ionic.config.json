@@ -1,5 +1,6 @@
 {
   "name": "mytabsapp",
   "integrations": {},
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "id": "a1a2cc44"
 }
