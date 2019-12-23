@@ -1,17 +1,50 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Contact
-    </ion-title>
-  </ion-navbar>
+  <header [titulo]="'Contact'"></header>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <h2>Contacto personal</h2>
+<!--
+DOS FORMAS PARA ENVIAR EL FORMULARIO
+1. Creando un objeto en el .ts y enviarlo con el meotodo del evento ngSubmit
+2. Definir el nombre del form #miformulario y pasarlo como parametro al método definido en ngSubmit(miformulario)
+  y es necesario especificar el atributo name para cada input
+  para recuperar los calores en el .ts se tiene que ocupar la propiedad .value   -> miformulario.value
+-->
+  <form #miformulario = "ngForm" (ngSubmit)="enviarForm(miformulario)">
+    <ion-list>
+      <ion-list-header> Formularion base</ion-list-header>
+      <ion-item>
+        <ion-label stacked>Nombres</ion-label>
+        <ion-input type="text" [(ngModel)]="contacto.nombre" name="nombre" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Apellidos</ion-label>
+        <ion-input type="text" [(ngModel)]="contacto.apellido" name="apellido" required></ion-input>
+      </ion-item>
+      <ion-item>
+      <!-- Validar que el  formulario sea valido -->
+        <button ion-button block type="submit" [disabled]="!miformulario.valid">Enviar</button>
+      </ion-item>
+    </ion-list>
+  </form>
+
+<!--  SEGUNDO FORMULARIO  DATA DRIVEN FORMS-->
+  <form [formGroup]="miForm" (ngSubmit)="enviarform2()">
+    <ion-list>
+      <ion-list-header>Segundo formulario</ion-list-header>
+      <ion-item>
+        <ion-label stacked>Nombres</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+<!--                    NombreFormulario.Controls.nombrePriedad.estado        -->
+      <ion-item *ngIf="miForm.controls.nombre.valid">
+        <ion-label stacked>Apellidos</ion-label>
+        <ion-input type="text" formControlName="apellido"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button block type="submit">Enviar</button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

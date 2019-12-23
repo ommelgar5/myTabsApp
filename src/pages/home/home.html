@@ -1,17 +1,76 @@
+<!--
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+no-border   quita el efecto de sombra del header
+-->
+
+<ion-header>
+ <header [titulo]="'Home'"></header>
 </ion-header>
 
 <ion-content padding>
   <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <button ion-button (click)="getPos()" block>Get posición</button>
+  <ion-list>
+<!--    Cada elemento de la lista es un boton-->
+<!--    <button ion-item *ngFor=" let item of lista"> {{ item.titulo }}</button>-->
+<!--   no-padding,padding-right, padding-left, padding-vertical, text-left, text-right, text-center, text-uppercase -> propiedades aplicables a cada ion-item -->
+    <ion-list-header text-uppercase color="accent"> Mi lista de elementos</ion-list-header>
+<!--    <ion-item *ngFor=" let item of lista" detail-none text-left text-uppercase>   &lt;!&ndash; detail-push, mostrar la fecha hacia abajo pero solo en ios, detail-none, oculta las fechas&ndash;&gt;-->
+<!--      {{ item.titulo }}-->
+<!--    </ion-item>-->
+
+    <ion-item-group>
+<!--    text-wrap, para que muestre toda la info del texto y no agregue los puntos suspensivos  -->
+      <ion-item *ngFor=" let item of lista" text-left detail-none text-wrap>   <!-- detail-push, mostrar la fecha hacia abajo pero solo en ios, detail-none, oculta las fechas-->
+        <ion-avatar item-left><img [src]="'assets/iconos/ico_' + item.id + '.png'"></ion-avatar>
+        <ion-label>{{ item.titulo }}</ion-label>
+        <p>{{ item.descripcion }}</p>
+        <ion-toggle item-right color="primary-dark"></ion-toggle>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-divider text-uppercase color="accent">Divisor</ion-item-divider>
+    <ion-item-group>
+      <ion-item *ngFor=" let item of lista" text-left detail-none text-wrap>   <!-- detail-push, mostrar la fecha hacia abajo pero solo en ios, detail-none, oculta las fechas-->
+        <ion-avatar item-left><img [src]="'assets/iconos/ico_' + item.id + '.png'"></ion-avatar>
+        <ion-label>{{ item.titulo }}</ion-label>
+        <p>{{ item.descripcion }}</p>
+        <ion-note item-right>Mi texto</ion-note>   <!-- item-left -->
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-divider text-uppercase color="accent">Divisor</ion-item-divider>
+    <ion-item-group>
+      <ion-item *ngFor=" let item of lista" detail-none text-left>   <!-- text-uppercase, detail-push->mostrar la fecha hacia abajo pero solo en ios, detail-none, oculta las fechas-->
+        <ion-thumbnail item-left><img [src]="'assets/thumbnails/thumb_'+ item.id + '.png'" (click)="abreModal(item)"></ion-thumbnail>
+        <h2>{{ item.titulo }}</h2>
+        <ion-badge item-right color="primary-custom">{{ item.id }}</ion-badge>
+        <button ion-button outline item-right (click)="irDetalle(item)">ver</button> <!--item-left -->
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+<!--  INFINITE SCROLL -->
+  <ion-item-group>
+    <ion-item *ngFor=" let item of listaNombres" text-left detail-none text-wrap>
+      <ion-avatar item-left><img [src]="'assets/iconos/ico_' + item.id + '.png'"></ion-avatar>
+      <ion-label>{{ item.titulo }}</ion-label>
+      <p>{{ item.descripcion }}</p>
+      <ion-toggle item-right color="primary-dark"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+<!--  threshold="10%" cuando se debe lanzar la carga, faltando el 10% de la lista -->
+  <ion-infinite-scroll threshold="10%" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Cargando nuevos datos..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+<!--  <p>-->
+<!--    This starter project comes with simple tabs-based layout for apps-->
+<!--    that are going to primarily use a Tabbed UI.-->
+<!--  </p>-->
+<!--  <p>-->
+<!--    Take a look at the <code>src/pages/</code> directory to add or change tabs,-->
+<!--    update any existing page or create new pages.-->
+<!--  </p>-->
 </ion-content>

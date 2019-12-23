@@ -1,11 +1,66 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
-  </ion-navbar>
+  <header [titulo]="'About'"></header>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-segment [(ngModel)]="seleccion" padding-bottom>
+    <ion-segment-button value="grupo1">Grupo 1</ion-segment-button>
+    <ion-segment-button value="grupo2">Grupo 2</ion-segment-button>
+    <ion-segment-button value="grupo3">Grupo 3</ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="seleccion == 'grupo1'">
+    <button ion-button full (click)="showAlert()">Prompt</button>
+    <button ion-button color="danger">Danger</button>
+    <button ion-button full>Full</button>
+    <button ion-button block>Block</button>
+    <button ion-button round>Round</button>
+    <button ion-button small>Small</button>
+    <button ion-button large>Large</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button block>Botón 1</button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button block>Botón 2</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block>Botón 3</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf=" seleccion == 'grupo2'">
+    <button ion-button outline>Outline</button>
+    <button ion-button  round outline>Round Outline</button>
+    <button ion-button clear>Clear</button>
+  </div>
+
+  <div *ngIf="seleccion == 'grupo3'">
+    <ion-icon name="analytics"></ion-icon>
+    <!--  Icono dentro de un boton, solo deja un pequeño espacion entre  el texto -->
+    <button ion-button icon-left>
+      <ion-icon name="analytics"></ion-icon>
+      Analytics
+    </button>
+    <button ion-button icon-right>
+      Analytics
+      <ion-icon name=add-circle></ion-icon>
+    </button>
+    <button ion-button icon-only>
+      <ion-icon name=add-circle></ion-icon>
+    </button>
+    <button ion-button icon-only clear>
+      <ion-icon name=add-circle></ion-icon>
+    </button>
+    <button ion-button icon-only outline>
+      <ion-icon name=add-circle></ion-icon>
+    </button>
+  </div>
+
+
 
 </ion-content>
